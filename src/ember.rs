@@ -247,4 +247,10 @@ impl Ember {
             *pixel = 0;
         }
     }
+
+    pub fn clear_color(&mut self, color: u32) {
+        for pixel in self.buffer.iter_mut() {
+            *pixel = color;
+        }
+    }
 }

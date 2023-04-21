@@ -9,32 +9,32 @@ Ember is a simple and fun 2D rendering library for Rust, allowing you to quickly
 - Efficient pixel buffer manipulation
 - Mouse and keyboard input handling
 
-## Example
+## Examples
 
 The following example demonstrates some of Ember's features:
 
 ```rust
-use ember::Ember;
+use ember_rs::Ember;
 
 fn main() {
-    let (width, height) = (800, 800);
-    let fps = 60.0;
-    let mut screen = Ember::new("Ember - Simple Example", width, height, fps);
+    let (width, height, fps) = (800, 600, 144.0);
+    let mut app = Ember::new("Ember - Simple Example", width, height, fps);
 
-    while !screen.should_close() {
-        screen.clear();
+    while !app.should_close() {
+        // clear the previous drawing
+        app.clear();
 
-        // Draw a red circle at the center of the window
-        screen.draw_circle(width / 2, height / 2, 50, 0xFF0000);
+        // draw text at the top-left of the screen at size 4
+        app.draw_text("ember is awesome", 20, 20, 4, 0xFFAAAA);
 
-        // Draw a green rectangle at the top-left corner
-        screen.draw_rectangle_fill(20, 20, 120, 70, 0x00FF00);
+        // draw a filled white circle at the bottom-right of the window
+        app.draw_circle_fill(700, 500, 40, 0xFFFFFF);
 
-        // Draw light blue text at the bottom-left corner at size 3
-        screen.draw_text("Ember is awesome!", 20, 540, 3, 0x22AAFF);
+        // draw a green-ish line going from the text to the circle
+        app.draw_line(310, 70, 630, 430, 0xAAFFAA);
 
-        // Update the window with the new drawing
-        screen.update();
+        // update the screen with the new drawing
+        app.update();
     }
 }
 ```
