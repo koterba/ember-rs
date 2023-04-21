@@ -1,6 +1,6 @@
 [package]
 name = "ember-rs"
-version = "0.1.0"
+version = "0.1.2"
 edition = "2021"
 authors = ["Alan Koterba alan@koterba.dev"]
 
