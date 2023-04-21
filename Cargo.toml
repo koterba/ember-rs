@@ -3,6 +3,8 @@ name = "ember-rs"
 version = "0.1.2"
 edition = "2021"
 authors = ["Alan Koterba alan@koterba.dev"]
+description = "Ember is a minimalistic Rust library for creating 2D graphics, games, and interactive visualizations with ease and simplicity."
+license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
