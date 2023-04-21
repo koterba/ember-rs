@@ -1,6 +1,11 @@
+<div align="center">
+  <img width="40%" src="https://cdn.discordapp.com/attachments/947092663914623016/1099095358866460753/ember.png" />
+
 # Ember
 
 Ember is a simple and fun 2D rendering library for Rust, allowing you to quickly create graphics and interactive applications with ease. It uses the `minifb` crate under the hood to handle window creation and input events.
+
+</div>
 
 ## Features
 
