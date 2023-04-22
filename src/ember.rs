@@ -222,6 +222,13 @@ impl Ember {
         self.window.get_keys()
     }
 
+    pub fn process_keys<F>(&mut self, f: F)
+    where
+        F: FnMut(&Key)
+    {
+        self.window.get_keys().iter().for_each(f);
+    }
+
     pub fn get_mouse_info(&self) -> MouseInfo {
         let position = self.window.get_mouse_pos(MouseMode::Clamp).map(|(x, y)| (x as f32, y as f32));
         let left_button = self.window.get_mouse_down(MouseButton::Left);

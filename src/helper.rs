@@ -1,7 +1,10 @@
 pub fn center_text(text: &str, x: i32, y: i32, scale: i32) -> (i32, i32, i32) {
+
     let text_length = text.len() as i32;
-    let width  = (text_length * 8) + scale;
-    let height = 8 + scale;
+
+    let width = text_length * (8 * scale);
+
+    let height = 8 * scale;
 
     let x = x-(width/2);
     let y = y-(height/2);
