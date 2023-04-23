@@ -16,6 +16,8 @@ Ember is a simple and fun 2D rendering library for Rust, allowing you to quickly
 
 ## Examples
 
+### Basic Drawing Example
+
 The following example demonstrates some of Ember's features:
 
 ```rust
@@ -42,6 +44,56 @@ fn main() {
         app.update();
     }
 }
+```
+
+### Mouse and Keyboard Input Example
+
+The following example demonstrates mouse and keyboard input handling:
+
+```rust
+
+use ember_rs::{Ember, Key};
+
+fn main() {
+    let (width, height, fps) = (800, 600, 144.0);
+    let mut app = Ember::new("Ember - Mouse and Keyboard Example", width, height, fps);
+
+    let mut circle_x = width / 2;
+    let mut circle_y = height / 2;
+    let circle_radius = 40;
+
+    while !app.should_close() {
+        // clear the previous drawing
+        app.clear();
+
+        // handle keyboard input
+        app.process_keys(|key| match key {
+            Key::W => circle_y -= 5,
+            Key::A => circle_x -= 5,
+            Key::S => circle_y += 5,
+            Key::D => circle_x += 5,
+            _ => {}
+        });
+
+        // alternatively use app.get_keys() which returns a Vec<Key>
+
+        // handle mouse input
+        let mouse_info = app.get_mouse_info();
+        if let Some((mouse_x, mouse_y)) = mouse_info.position {
+            if mouse_info.left_button {
+                circle_x = mouse_x as i32;
+                circle_y = mouse_y as i32;
+            }
+        }
+
+        // draw a filled circle at the current position
+        app.draw_circle_fill(circle_x, circle_y, circle_radius, 0xFF0000);
+
+        // update the screen with the new drawing
+        app.update();
+    }
+}
+
 ```
 
 ## Installation

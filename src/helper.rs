@@ -1,4 +1,4 @@
-pub fn center_text(text: &str, x: i32, y: i32, scale: i32) -> (i32, i32, i32) {
+pub fn center_text(text: &str, x: i32, y: i32, scale: i32) -> (i32, i32) {
 
     let text_length = text.len() as i32;
 
@@ -9,7 +9,7 @@ pub fn center_text(text: &str, x: i32, y: i32, scale: i32) -> (i32, i32, i32) {
     let x = x-(width/2);
     let y = y-(height/2);
 
-    (x, y, scale)
+    (x, y)
 }
 
 pub fn at_angle(x1: i32, y1: i32, length: i32, angle: f32) -> (i32, i32) {
