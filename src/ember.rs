@@ -33,7 +33,7 @@ impl Ember {
         if fps > 0.0 {
             let fps: f32 = 1.0 / (fps / 1_000_000.0);
             let fps: u64 = fps as u64;
-    
+
             window.limit_update_rate(Some(std::time::Duration::from_micros(fps)));
         }
 
@@ -64,7 +64,7 @@ impl Ember {
         let sy = if y1 < y2 { 1 } else { -1 };
         let mut err = if dx > dy { dx } else { -dy } / 2;
         let mut err2;
-    
+
         let mut x = x1;
         let mut y = y1;
         loop {
@@ -90,26 +90,26 @@ impl Ember {
         let sx = if x0 < x1 { 1 } else { -1 };
         let sy = if y0 < y1 { 1 } else { -1 };
         let mut err = dx - dy;
-    
+
         let mut x = x0;
         let mut y = y0;
-    
+
         let half_width = width / 2;
-    
+
         while x != x1 || y != y1 {
             // Draw a square around the point (x, y) with a side length of `width`
             for i in -half_width..=half_width {
                 for j in -half_width..=half_width {
                     self.set_pixel(
-                        x + i, 
-                        y + j, 
+                        x + i,
+                        y + j,
                         color
                     );
                 }
             }
-    
+
             let err2 = 2 * err;
-    
+
             if err2 > -dy {
                 err -= dy;
                 x += sx;
@@ -141,7 +141,7 @@ impl Ember {
         let mut x = radius;
         let mut y = 0;
         let mut err = 0;
-    
+
         while x >= y {
             self.set_pixel(x0 + x, y0 + y, color);
             self.set_pixel(x0 + y, y0 + x, color);
@@ -151,7 +151,7 @@ impl Ember {
             self.set_pixel(x0 - y, y0 - x, color);
             self.set_pixel(x0 + y, y0 - x, color);
             self.set_pixel(x0 + x, y0 - y, color);
-    
+
             y += 1;
             err += 1 + 2 * y;
             if 2 * (err - x) + 1 > 0 {
@@ -165,13 +165,13 @@ impl Ember {
         let mut x = 0;
         let mut y = radius;
         let mut dp = 1 - radius;
-    
+
         while x <= y {
             self.draw_line(x0 - x, y0 - y, x0 + x, y0 - y, color);
             self.draw_line(x0 - x, y0 + y, x0 + x, y0 + y, color);
             self.draw_line(x0 - y, y0 - x, x0 + y, y0 - x, color);
             self.draw_line(x0 - y, y0 + x, x0 + y, y0 + x, color);
-    
+
             if dp < 0 {
                 dp = dp + 2 * x + 3;
             } else {
@@ -184,22 +184,24 @@ impl Ember {
 
     pub fn draw_text(&mut self, text: &str, x: i32, y: i32, scale: i32, color: u32) {
         let mut current_x = x;
-    
+
         for ch in text.to_uppercase().chars() {
             let ascii = ch as usize;
-            if (ascii >= 65 && ascii <= 90) || (ascii >= 48 && ascii <= 57) || ch == '.'  || ch == ':' {
-                let font_index = if ascii >= 65 { 
-                    ascii - 65 
+            if (ascii >= 65 && ascii <= 90) || (ascii >= 48 && ascii <= 57) || ch == '.'  || ch == ':' || ch == ',' {
+                let font_index = if ascii >= 65 {
+                    ascii - 65
                 } else if ch == '.' {
                     26 + 10 // skip alph + nums
                 } else if ch == ':' {
                     26 + 10 + 1 // skip alph + nums + dot
-                } else { 
-                    ascii - 48 + 26 
+                } else if ch == ',' {
+                    26 + 10 + 1 + 1
+                } else {
+                    ascii - 48 + 26
                 };
 
                 let character = &FONT_DATA[font_index];
-    
+
                 for i in 0..8 {
                     let row = character[i];
                     for j in 0..8 {
@@ -213,7 +215,7 @@ impl Ember {
                     }
                 }
             }
-    
+
             current_x += 8 * scale;
         }
     }

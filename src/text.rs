@@ -1,7 +1,7 @@
 // pub const FONT_WIDTH: usize = 8;
 pub const FONT_HEIGHT: usize = 8;
 
-pub const FONT_DATA: [[u8; FONT_HEIGHT]; 38] = [
+pub const FONT_DATA: [[u8; FONT_HEIGHT]; 39] = [
     [
         0b00111100, // A
         0b01000010,
@@ -381,5 +381,15 @@ pub const FONT_DATA: [[u8; FONT_HEIGHT]; 38] = [
         0b00011000,
         0b00000000,
         0b00000000,
+    ],
+    [
+        0b00000000, // ,
+        0b00000000,
+        0b00000000,
+        0b00000000,
+        0b00000000,
+        0b00011000,
+        0b00011000,
+        0b00110000,
     ]
 ];
