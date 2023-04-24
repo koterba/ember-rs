@@ -51,7 +51,6 @@ fn main() {
 The following example demonstrates mouse and keyboard input handling:
 
 ```rust
-
 use ember_rs::{Ember, Key};
 
 fn main() {
@@ -93,7 +92,6 @@ fn main() {
         app.update();
     }
 }
-
 ```
 
 ### Filled Shapes Example
@@ -101,7 +99,6 @@ fn main() {
 The following example demonstrates drawing various filled shapes:
 
 ```rust
-
 // this method is used under the hood for all the other methods
 app.set_pixel(x, y, color);
 
@@ -122,7 +119,6 @@ app.draw_circle(x, y, radius, color);
 
 // draw a filled circle
 app.draw_circle_fill(x, y, radius, color);
-
 ```
 
 ### Draw Text Example
@@ -154,7 +150,26 @@ fn main() {
         app.update();
     }
 }
+```
 
+### Color Example
+
+The following example demonstrates ways to create colors:
+
+```rust
+use ember_rs::Color
+
+// shortest way to write a color
+let color = 0xFFFFFF;
+
+// from RGB
+let color = Color::from_rgb(255, 255, 255);
+
+// from HSL
+let color = Color::from_hsl(0.0, 0.0, 100.0);
+
+// from hex string
+let color = Color::from_hex("FFFFFF");
 ```
 
 ## Installation
