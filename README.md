@@ -96,6 +96,67 @@ fn main() {
 
 ```
 
+### Filled Shapes Example
+
+The following example demonstrates drawing various filled shapes:
+
+```rust
+
+// this method is used under the hood for all the other methods
+app.set_pixel(x, y, color);
+
+// draw a line
+app.draw_line(x1, y1, x2, y2, color);
+
+// draw a line with a specific width
+app.draw_line_width(x1, y1, x2, y2, width, color);
+
+// draw a rectangle 
+app.draw_rectangle(x, y, width, height, color);
+
+// draw a filled rectangle
+app.draw_rectangle_fill(x, y, width, height, color);
+
+// draw a circle
+app.draw_circle(x, y, radius, color);
+
+// draw a filled circle
+app.draw_circle_fill(x, y, radius, color);
+
+```
+
+### Draw Text Example
+
+The following example demonstrates how to draw text to the screen:
+
+```rust
+use ember_rs::{Ember, helper};
+
+fn main() {
+    let (width, height, fps) = (800, 600, 144.0);
+    let mut app = Ember::new("Ember - Mouse and Keyboard Example", width, height, fps);
+
+    while !app.should_close() {
+        // clear the previous drawing
+        app.clear();
+
+        // draw text to the screen at position (20, 20), scaled 4 times
+        app.draw_text("hello world", 50, 50, 4, 0xFFFFFF);
+
+        // if you want to center the text, use one of the helper methods
+        let text = format!("Width: {}", width);
+        // this return the (x, y) needed to center the text
+        let (x, y) = helper::center_text(&text, 400, 400, 4);
+        // draw the centered text
+        app.draw_text(&text, x, y, 4, 0xAAAAFF);
+
+        // update the screen with the new drawing
+        app.update();
+    }
+}
+
+```
+
 ## Installation
 
 To get started with Ember, type the following command inside of your project:
