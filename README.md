@@ -168,7 +168,7 @@ let color = Color::from_rgb(255, 255, 255);
 // from HSL
 let color = Color::from_hsl(0.0, 0.0, 100.0);
 
-// from hex string
+// from hex string - results to FFFFFF if unable to parse
 let color = Color::from_hex("FFFFFF");
 ```
 
