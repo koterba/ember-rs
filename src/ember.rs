@@ -1,12 +1,16 @@
 use minifb::{Window, WindowOptions, MouseMode, MouseButton};
 pub use minifb::Key;
 
-use crate::text::FONT_DATA;
+use std::collections::HashMap;
+
+use crate::text::{self, FONT_HEIGHT};
 
 pub struct Ember {
-    buffer: Vec<u32>,
     pub width: i32,
     pub height: i32,
+
+    buffer: Vec<u32>,
+    font: HashMap<char, [u8; FONT_HEIGHT]>,
 
     window: Window
 }
@@ -39,7 +43,9 @@ impl Ember {
 
         let buffer: Vec<u32> = vec![0; (width * height) as usize];
 
-        Self { buffer, width, height, window }
+        let font = text::get_font();
+
+        Self {  width, height, buffer, font, window }
     }
 
     pub fn update(&mut self) {
@@ -186,30 +192,16 @@ impl Ember {
         let mut current_x = x;
 
         for ch in text.to_uppercase().chars() {
-            let ascii = ch as usize;
-            if (ascii >= 65 && ascii <= 90) || (ascii >= 48 && ascii <= 57) || ch == '.'  || ch == ':' || ch == ',' {
-                let font_index = if ascii >= 65 {
-                    ascii - 65
-                } else if ch == '.' {
-                    26 + 10 // skip alph + nums
-                } else if ch == ':' {
-                    26 + 10 + 1 // skip alph + nums + dot
-                } else if ch == ',' {
-                    26 + 10 + 1 + 1
-                } else {
-                    ascii - 48 + 26
-                };
 
-                let character = &FONT_DATA[font_index];
+            let character = self.font.get(&ch).unwrap_or(&text::EMPTY).clone();
 
-                for i in 0..8 {
-                    let row = character[i];
-                    for j in 0..8 {
-                        if row & (1 << (7 - j)) != 0 {
-                            for s_y in 0..scale {
-                                for s_x in 0..scale {
-                                    self.set_pixel(current_x + j * scale + s_x, y + i as i32 * scale + s_y, color);
-                                }
+            for i in 0..8 {
+                let row = character[i];
+                for j in 0..8 {
+                    if row & (1 << (7 - j)) != 0 {
+                        for s_y in 0..scale {
+                            for s_x in 0..scale {
+                                self.set_pixel(current_x + j * scale + s_x, y + i as i32 * scale + s_y, color);
                             }
                         }
                     }
