@@ -1,5 +1,53 @@
-// pub const FONT_WIDTH: usize = 8;
+use std::collections::HashMap;
+
 pub const FONT_HEIGHT: usize = 8;
+
+
+pub fn get_font() -> HashMap<char, [u8; FONT_HEIGHT]> {
+	let mut font = HashMap::new();
+
+	font.insert('A', 
+	    [
+	        0b00111100, // A
+	        0b01000010,
+	        0b01000010,
+	        0b01111110,
+	        0b01000010,
+	        0b01000010,
+	        0b01000010,
+	        0b00000000,
+	    ]
+	);
+
+	font.insert('B',
+	
+	);
+
+	font.insert('C',
+		[
+	        0b01111100, // "b"
+	        0b01000010,
+	        0b01000010,
+	        0b01111100,
+	        0b01000010,
+	        0b01000010,
+	        0b01111100,
+	        0b00000000,
+	    ]
+	);
+
+	font.insert('D',
+	
+	);
+
+	font.insert('E',
+	
+	);
+
+	font	
+}
+
+
 
 pub const FONT_DATA: [[u8; FONT_HEIGHT]; 39] = [
     [
