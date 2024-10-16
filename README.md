@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="60%" src="https://cdn.discordapp.com/attachments/947092663914623016/1099661929028522027/ember_logo.png" />
+  <img width="60%" src="https://files.alan0.com/emberLogo.png" />
 
 # Ember
 
